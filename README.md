@@ -144,19 +144,19 @@ Body:
 
 ```bash
 # Login
-curl -X POST http://localhost:4000/api/whatsapp/login \
+curl -X POST http://wp-api.nevsync.com/api/whatsapp/login \
   -H "Content-Type: application/json" \
   -H "x-api-key: your-api-key" \
   -d '{"tenant": "test-tenant", "branchId": 1}'
 
 # Status Check
-curl -X POST http://localhost:4000/api/whatsapp/login/status \
+curl -X POST http://wp-api.nevsync.com/api/whatsapp/login/status \
   -H "Content-Type: application/json" \
   -H "x-api-key: your-api-key" \
   -d '{"tenant": "test-tenant", "branchId": 1}'
 
 # Send Message
-curl -X POST http://localhost:4000/api/whatsapp/send \
+curl -X POST http://wp-api.nevsync.com/api/whatsapp/send \
   -H "Content-Type: application/json" \
   -H "x-api-key: your-api-key" \
   -d '{"tenant": "test-tenant", "branchId": 1, "phone": "905051234567", "message": "Test mesajı"}'

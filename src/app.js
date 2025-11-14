@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "./config/swagger.js";
 import whatsappRoutes from "./routes/whatsapp.routes.js";
 
 dotenv.config();
@@ -15,7 +17,18 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+  customCss: '.swagger-ui .topbar { display: none }',
+  customSiteTitle: 'Mudslide WhatsApp API Documentation',
+  swaggerOptions: {
+    persistAuthorization: true,
+  },
+}));
+
 app.use((req, res, next) => {
+    if (req.path.startsWith('/api-docs')) {
+        return next();
+    }
     const key = req.headers["x-api-key"];
     if (key !== process.env.API_KEY) {
         return res.status(401).json({ error: "Unauthorized" });
